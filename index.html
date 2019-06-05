@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body style="background-image: url(bg.jpg)">
+
+	<h4>Муравьи: <span class="count_juki"></span></h4>
+	<h4>Очки: <span class="score_text"></span></h4>
+
+	<script type="text/javascript">
+		
+		let juki = 0;
+		let score = 0;
+		let x = function(arg){
+			let rand_left = Math.random() * arg;
+			let round_left = Math.round(rand_left);
+			return round_left;
+		}
+		let create = function(){
+
+			let newImg = document.createElement("img");
+			document.body.appendChild(newImg);
+
+			newImg.src = "img.svg";
+			newImg.style.width = "100px";
+			newImg.style.height = "100px";
+			newImg.style.position = "absolute";
+			newImg.style.marginLeft = x(1300) + "px";
+			newImg.style.marginTop = x(600) + "px";
+
+			juki = juki + 1;
+			document.querySelector(".count_juki").innerHTML = juki;
+
+			newImg.onclick = function(){
+				newImg.style.display = "none";
+				score = score + 1;
+				document.querySelector('.score_text').innerHTML = score;
+			}
+		}
+		let check = function(){
+			if(score==juki-1){
+				alert("you win");
+				clearInterval(timerID);
+			}else{
+				alert("you lose");
+				clearInterval(timerID);
+			}
+		}
+
+		let timerID = setInterval(create,1000);
+		setTimeOut(check,10000);
+	</script>
+</body>
+</html>
